@@ -11,18 +11,24 @@ kind create cluster --name minilab --config plataforma/kind-minilab-config.yaml
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
 ```
+
 ## Instalar ArgoCD
+
 ```bash
 kubectl apply -f plataforma/argocd/cd-platform-ns.yaml
 kubectl apply -f plataforma/argocd/install.yaml -n cd-platform
 kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n cd-platform
 kubectl apply -f plataforma/argocd/argocd-ingress.yaml -n cd-platform
+kubectl apply -f plataforma/argocd/argocd-platform-bootstrap.yaml #Para crear el ArgoCD Project "plataforma-minilab" y poder sincronizar las aplicaciones de bootstrap.
 
 ```
+
 Para sacar la contraseña inicial de usuario admin de argocd:
+
 ```bash
 kubectl -n cd-platform get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
+
 Se accede a la UI de ArgoCD con la url http://localhost/argocd/
 
 
