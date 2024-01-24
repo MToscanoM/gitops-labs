@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hashicorp-vault
+  namespace: cd-platform
+spec:
+  project: plataforma-minilab
+  sources:
+  - chart: vault
+    repoURL: https://helm.releases.hashicorp.com
+    targetRevision: 0.23.0
+    helm:
+      releaseName: hashicorp-vault
+      #Enable once we have Prometheus installed
+      parameters:
+      #- name: "serverTelemetry.prometheusOperator"
+      #  value: "true"
+      #- name: "injector.metrics.enabled"
+      #  value: "true"
+      - name: "ui.enabled"
+        value: "true"
+      - name: "server.dataStorage.size"
+        value: "1Gi"
+      # - name: "server.dataStorage.storageClass"
+  - repoURL: https://github.com/MToscanoM/gitops-labs.git
+    #  affinity:
+    #   value: "local-storage"
+    # Falta configurar AFFFINITY a nodo-1
+    #   nodeAffinity:
+    #     preferredDuringSchedulingIgnoredDuringExecution:
+    #       - weight: 1
+    #         preference:
+    #           matchExpressions:
+    #           - key: kubernetes.io/hostname
+    #             operator: In
+    #             values:
+    #               - nodo-1
+    targetRevision: HEAD
+    path: bootstrap/vault
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    automated:
+      selfHeal: true
+      prune: true
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: platform-vault
+  ignoreDifferences:
+  - group: apps
+    kind: MutatingWebhookConfiguration
+    jqPathExpressions:
+    - .items[].webhooks[].clientConfig.caBundle

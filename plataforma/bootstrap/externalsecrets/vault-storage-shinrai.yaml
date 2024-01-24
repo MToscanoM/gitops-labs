@@ -1,0 +1,17 @@
+apiVersion: external-secrets.io/v1alpha1
+kind: ClusterSecretStore
+metadata:
+  name: vault-store-minilab
+  annotations:
+    kubernetes.io/service-account.name: "external-secrets"
+spec:
+  provider:
+    vault:
+      server: "http://hashicorp-vault.platform-vault:8200"
+      # server: "https://hashicorp-vault.platform-vault:8201" No funciona al presentar un autosigned 
+      path: "minilab"
+      version: "v2"
+      auth:
+        kubernetes:
+          mountPath: "kubernetes"
+          role: "external-secrets-role"
