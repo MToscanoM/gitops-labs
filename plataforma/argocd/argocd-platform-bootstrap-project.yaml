@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: plataforma-minilab
-  namespace: cd-platform
+  namespace: argocd-platform
 spec:
   clusterResourceWhitelist:
   - group: '*'
@@ -17,22 +17,29 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: plataforma-minilab
-  namespace: cd-platform
+  namespace: argocd-platform
 spec:
   project: plataforma-minilab
   source:
-    repoURL: hhttps://github.com/MToscanoM/gitops-labs.git
+    repoURL: https://github.com/MToscanoM/gitops-labs.git
     targetRevision: HEAD
-    path: plataforma/bootstrap
+    path: ./plataforma/bootstrap
+
+    # directory
+    directory:
+      recurse: false
+  # Destination cluster and namespace to deploy the application    
   destination:
     server: https://kubernetes.default.svc
-    namespace: cd-platform
+    namespace: argocd-platform
+
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
-    automated:
-      selfHeal: true
-      prune: true
+    automated: # automated sync by default retries failed attempts 5 times with following delays between attempts ( 5s, 10s, 20s, 40s, 80s ); retry controlled using `retry` field.
+      selfHeal: true # Specifies if partial app sync should be executed when resources are changed only in target Kubernetes cluster and no git change detected ( false by default ).
+      prune: true # Specifies if resources should be pruned during auto-syncing ( false by default ).
+      allowEmpty: false # Allows deleting all application resources during automatic syncing ( false by default ).
     retry:
       limit: 5 # number of failed sync attempt retries; unlimited number of attempts if less than 0
       backoff:

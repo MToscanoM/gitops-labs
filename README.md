@@ -15,11 +15,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 ## Instalar ArgoCD
 
 ```bash
-kubectl apply -f plataforma/argocd/cd-platform-ns.yaml
-kubectl apply -f plataforma/argocd/install.yaml -n cd-platform
-kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n cd-platform
-kubectl apply -f plataforma/argocd/argocd-ingress.yaml -n cd-platform
-kubectl apply -f plataforma/argocd/argocd-platform-bootstrap.yaml #Para crear el ArgoCD Project "plataforma-minilab" y poder sincronizar las aplicaciones de bootstrap.
+kubectl apply -f plataforma/argocd/argocd-platform-ns.yaml
+kubectl apply -f plataforma/argocd/install.yaml -n argocd-platform
+kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n argocd-platform
+kubectl apply -f plataforma/argocd/argocd-ingress.yaml -n argocd-platform
+kubectl apply -f plataforma/argocd/argocd-platform-bootstrap-project.yaml #Para crear el ArgoCD Project "plataforma-minilab" y poder sincronizar las aplicaciones de bootstrap.
 
 ```
 

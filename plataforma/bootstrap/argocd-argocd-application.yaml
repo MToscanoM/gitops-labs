@@ -2,16 +2,16 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: argocd
-  namespace: cd-platform
+  namespace: argocd-platform
 spec:
   project: plataforma-minilab
   source:
     repoURL: https://github.com/MToscanoM/gitops-labs.git
     targetRevision: HEAD
-    path: plataforma/argocd
+    path: ./plataforma/argocd
   destination:
     server: https://kubernetes.default.svc
-    namespace: cd-platform
+    namespace: argocd-platform
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
