@@ -4,15 +4,15 @@ metadata:
   name: vault-ingress
   namespace: platform-vault
   annotations:
-    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/rewrite-target: /vault/$1
-    nginx.ingress.kubernetes.io/use-regex: 'true'
+    # nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
   - http:
       paths:
-      - path: /vault(/|$)(.*)
-        pathType: ImplementationSpecific
+      - path: /vault/(.*)
+        pathType: Prefix
         backend:
           service:
             name: hashicorp-vault-ui
