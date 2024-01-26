@@ -23,7 +23,7 @@ spec:
   source:
     repoURL: https://github.com/MToscanoM/gitops-labs.git
     targetRevision: HEAD
-    path: ./plataforma/bootstrap
+    path: plataforma/bootstrap
 
     # directory
     directory:
