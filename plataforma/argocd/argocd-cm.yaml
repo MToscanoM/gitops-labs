@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/name: argocd-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-cm
+  namespace: argocd-platform
+data:
+  server.insecure: "true"
+  exec.enabled: "true"
+  accounts.demo-apps-admin: login
+  accounts.demo-apps-admin.enabled: "true"
+  accounts.demo-apps-dev: login
+  accounts.demo-apps-dev.enabled: "true"
+  accounts.demo-apps-sa: apiKey
+  accounts.demo-apps-sa.enabled: "true"
+  accounts.mariano: login
+  accounts.mariano.enabled: "true"
+  application.instanceLabelKey: argocd.argoproj.io/instance
+  url: http://localhost/argocd/
+  resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
+    jqPathExpressions:
+    - '.webhooks[]?.clientConfig.caBundle'
+  resource.customizations.ignoreDifferences.all: |
+    managedFieldsManagers:
+    - kube-controller-manager
+    jsonPointers:
+    - /spec/replicas

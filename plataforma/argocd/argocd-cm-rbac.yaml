@@ -1,0 +1,46 @@
+apiVersion: v1
+data:
+  policy.csv: |
+    p, role:argocd-platform-admins, applications, create, argocd-platform/*, allow
+    p, role:argocd-platform-admins, applications, delete, argocd-platform/*, allow
+    p, role:argocd-platform-admins, applications, action/apps/Deployment/restart, argocd-platform/*, allow
+    p, role:argocd-platform-admins, applications, get, argocd-platform/*, allow
+    p, role:argocd-platform-admins, applications, override, argocd-platform/*, allow
+    p, role:argocd-platform-admins, applications, sync, argocd-platform/*, allow
+    p, role:argocd-platform-admins, applications, update, argocd-platform/*, allow
+    p, role:argocd-platform-admins, logs, get, argocd-platform/*, allow
+    p, role:argocd-platform-admins, exec, create, argocd-platform/*, allow
+    p, role:argocd-platform-admins, projects, get, argocd-platform, allow
+
+    # p, role:demo-apps-admin-role, applications, action/apps/Deployment/restart, */*, allow
+    # p, role:demo-apps-admin-role, applications, sync, demo-apps/*, allow
+    # p, role:demo-apps-admin-role, applications, get, demo-apps/*, allow
+    # p, role:demo-apps-admin-role, applications, delete, demo-apps/*, allow
+    # p, role:demo-apps-admin-role, applications, update, demo-apps/*, allow
+    # p, role:demo-apps-admin-role, logs, get, demo-apps/*, allow
+
+    p, role:demo-apps-dev-role, applications, action/apps/Deployment/restart, */*, allow
+    p, role:demo-apps-dev-role, applications, sync, demo-apps/*, allow
+    p, role:demo-apps-dev-role, applications, get, demo-apps/*, allow
+    p, role:demo-apps-dev-role, logs, get, demo-apps/*, allow
+
+    p, role:demo-apps-github-role, applications, sync, demo-apps/*, allow
+
+    p, role:developer, applications, get, */*, allow
+
+    g, mariano, role:demo-apps-github-role
+    g, mariano, role:argocd-platform-admins
+    g, mariano, role:demo-apps-admin-role
+    g, demo-apps-sa, role:demo-apps-gitlab-role
+    g, demo-apps-admin, role:demo-apps-admin-role
+    g, demo-apps-dev, role:demo-apps-dev-role
+
+  policy.default: role:developer
+kind: ConfigMap
+metadata:
+  namespace: argocd-platform
+  labels:
+    app.kubernetes.io/component: server
+    app.kubernetes.io/name: argocd-rbac-cm
+    app.kubernetes.io/part-of: argocd
+  name: argocd-rbac-cm
