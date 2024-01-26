@@ -14,13 +14,20 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main
 
 ## Instalar ArgoCD
 
+https://argo-cd.readthedocs.io/en/stable/getting_started/#1-install-argo-cd
+
 ```bash
-# kubectl apply -f plataforma/argocd/argocd-platform-ns.yaml
-# kubectl apply -f plataforma/argocd/install.yaml -n argocd-platform
-# kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n argocd-platform
-# kubectl apply -f plataforma/argocd/argocd-ingress.yaml -n argocd-platform
-kubectl apply -f plataforma/argocd/
-# No podrá cargar el AppProject de ArgoCD porque le falta los CRD que no han dado tiempo a crearse.
+kubectl apply -f plataforma/argocd/argocd-platform-ns.yaml
+```
+
+> ¡OJO! Si se instala ArgoCD en un namespace con nombre diferente a "argocd" hay que modificarlo también en dos líneas que hacen referencia al namespace de los recursos del clusterrolebinding en el "install.yaml". Si no, ArgoCD no podrá desplegar aplicaciones en el propio cluster kubernetes.
+
+```bash
+kubectl apply -f plataforma/argocd/install.yaml -n argocd-platform
+kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n argocd-platform
+kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n argocd-platform
+kubectl apply -f plataforma/argocd/argocd-ingress.yaml -n argocd-platform
+
 # Cuando esté levantado ArgoCD creamos el ArgoCD Project "plataforma-minilab" y poder sincronizar las aplicaciones de bootstrap.
 kubectl apply -f plataforma/argocd/argocd-platform-bootstrap-project.yaml 
 
@@ -29,7 +36,10 @@ kubectl apply -f plataforma/argocd/argocd-platform-bootstrap-project.yaml
 Para sacar la contraseña inicial de usuario admin de argocd:
 
 ```bash
-kubectl -n cd-platform get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+kubectl -n argocd-platform get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+```powershell
+kubectl -n argocd-platform get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($_))}
 ```
 
 Se accede a la UI de ArgoCD con la url http://localhost/argocd/
@@ -52,5 +62,5 @@ minikube addons enable metrics-server
 
 minikube service argocd-server -n argocd --url
 
-kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($_))}
+kubectl -n argocd-platform get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($_))}
 ```
