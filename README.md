@@ -27,10 +27,6 @@ kubectl apply -f plataforma/argocd/install.yaml -n argocd-platform
 kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n argocd-platform
 kubectl apply -f plataforma/argocd/argocd-cmd-params-cm.yaml -n argocd-platform
 kubectl apply -f plataforma/argocd/argocd-ingress.yaml -n argocd-platform
-
-# Cuando esté levantado ArgoCD creamos el ArgoCD Project "plataforma-minilab" y poder sincronizar las aplicaciones de bootstrap.
-kubectl apply -f plataforma/argocd/argocd-platform-bootstrap-project.yaml 
-
 ```
 
 Para sacar la contraseña inicial de usuario admin de argocd:
@@ -38,12 +34,18 @@ Para sacar la contraseña inicial de usuario admin de argocd:
 ```bash
 kubectl -n argocd-platform get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
+
 ```powershell
 kubectl -n argocd-platform get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String($_))}
 ```
 
 Se accede a la UI de ArgoCD con la url http://localhost/argocd/
 
+Cuando esté levantado ArgoCD creamos el ArgoCD Project "plataforma-minilab" y poder sincronizar las aplicaciones de bootstrap.
+
+```bash
+kubectl apply -f plataforma/argocd/argocd-platform-bootstrap-project.yaml
+```
 
 ## minikube en WSL
 
