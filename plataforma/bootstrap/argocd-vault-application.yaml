@@ -23,18 +23,6 @@ spec:
         value: "1Gi"
       # - name: "server.dataStorage.storageClass"
   - repoURL: https://github.com/MToscanoM/gitops-labs.git
-    #  affinity:
-    #   value: "local-storage"
-    # Falta configurar AFFFINITY a nodo-1
-    #   nodeAffinity:
-    #     preferredDuringSchedulingIgnoredDuringExecution:
-    #       - weight: 1
-    #         preference:
-    #           matchExpressions:
-    #           - key: kubernetes.io/hostname
-    #             operator: In
-    #             values:
-    #               - nodo-1
     targetRevision: HEAD
     path: plataforma/bootstrap/vault
   syncPolicy:
