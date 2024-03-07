@@ -9,3 +9,9 @@ spec:
   - http:
       paths:
       - path: /pocs/prod/app1-kustomize
+        pathType: Prefix
+        backend:
+          service:
+            name: app1-kustomize-service
+            port:
+              number: 8080
