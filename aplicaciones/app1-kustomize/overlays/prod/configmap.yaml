@@ -6,4 +6,4 @@ data:
   mysqlDB: "mysql.prod.com:3306"
   PAYPAL_URL: "prod.app1-kustomize.com"
   ENV: "prod"
-  N_BUCKETS: "333"
+  N_BUCKETS: "350"

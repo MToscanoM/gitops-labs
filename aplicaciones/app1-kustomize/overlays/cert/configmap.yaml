@@ -4,6 +4,6 @@ metadata:
   name: app1-kustomize-configmap
 data:
   mysqlDB: "mysql.cert.com:3306"
-  paypal_url: "cert.app1-kustomize.com"
-  environment: "cert"
-  N_BUCKETS: "2"
+  PAYPAL_URL: "cert.app1-kustomize.com"
+  ENV: "cert"
+  N_BUCKETS: "5"
