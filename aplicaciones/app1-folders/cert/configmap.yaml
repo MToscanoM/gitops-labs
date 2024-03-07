@@ -4,8 +4,8 @@ metadata:
   name: app1-folders-configmap
 data:
   mysqlDB: "mysql.cert.com:3306"
-  paypal_url: "cert.app1-folders.com"
-  environment: "cert"
-  environment_type: "folders"
+  PAYPAL_URL: "cert.app1-folders.com"
+  ENV: "cert"
+  ENV_TYPE: "folders"
   UI_THEME: "light"
   N_BUCKETS: "2"

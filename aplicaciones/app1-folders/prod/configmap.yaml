@@ -4,8 +4,8 @@ metadata:
   name: app1-folders-configmap
 data:
   mysqlDB: "mysql.prod.com:3306"
-  paypal_url: "prod.app1-folders.com"
-  environment: "prod"
-  environment_type: "folders"
+  PAYPAL_URL: "prod.app1-folders.com"
+  ENV: "prod"
+  ENV_TYPE: "folders"
   UI_THEME: "light"
   N_BUCKETS: "333"

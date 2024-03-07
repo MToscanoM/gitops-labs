@@ -4,4 +4,4 @@ metadata:
   name: app1-kustomize-configmap
 data:
   UI_THEME: "light"
-  environment_type: "kustomize"
+  ENV_TYPE: "kustomize"
