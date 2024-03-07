@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app1-kustomize-configmap
+data:
+  UI_THEME: "light"
+  tipo: "kustomize"

@@ -1,0 +1,8 @@
+commonLabels:
+  app: app1-kustomize-go-web-app
+
+resources:
+- deployment.yaml
+- service.yaml
+- configmap.yaml
+- ingress.yaml

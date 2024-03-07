@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app1-folders-configmap
+data:
+  mysqlDB: "mysql.prod.com:3306"
+  tipo: "folders"
+  entorno: "prod"
+  UI_THEME: "light"
+  N_BUCKETS: "33"

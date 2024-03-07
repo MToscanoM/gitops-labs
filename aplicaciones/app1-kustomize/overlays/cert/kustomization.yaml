@@ -1,0 +1,8 @@
+namePrefix: cert-
+commonLabels:
+  variant: cert
+bases:
+- ../../base
+patchesStrategicMerge:
+- configmap.yaml
+- ingress.yaml
