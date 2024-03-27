@@ -2,11 +2,11 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: kube-prometheus-stack
-  namespace: argocd
+  namespace: argocd-platform
 spec:
   destination:
     name: in-cluster
-    namespace: argocd
+    namespace: platform-monitoring
   project: default
   source:
     repoURL: https://prometheus-community.github.io/helm-charts
