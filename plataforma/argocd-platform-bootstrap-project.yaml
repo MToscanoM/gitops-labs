@@ -24,6 +24,8 @@ spec:
     repoURL: https://github.com/MToscanoM/gitops-labs.git
     targetRevision: HEAD
     path: plataforma/bootstrap
+    directory:
+      recurse: true
 
   # Destination cluster and namespace to deploy the application    
   destination:
