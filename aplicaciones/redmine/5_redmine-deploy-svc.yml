@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redmine
+  namespace: redmine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redmine
+  template:
+    metadata:
+      labels:
+        app: redmine
+    spec:
+      containers:
+      - name: redmine
+        image: redmine:latest
+        env:
+        - name: REDMINE_DB_POSTGRES
+          valueFrom:
+            secretKeyRef:
+              name: redmine-secret
+              key: REDMINE_DB_POSTGRES
+        - name: REDMINE_DB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: redmine-secret
+              key: REDMINE_DB_USERNAME
+        - name: REDMINE_DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: redmine-secret
+              key: REDMINE_DB_PASSWORD
+        - name: REDMINE_DB_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: redmine-secret
+              key: REDMINE_DB_DATABASE
+        # - name: RAILS_RELATIVE_URL_ROOT
+        #   value: /redmine
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+        - mountPath: /usr/src/redmine/files
+          name: redmine-storage
+        resources: {}
+      volumes:
+      - name: redmine-storage
+        persistentVolumeClaim:
+          claimName: pvc-redmine
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redmine
+  namespace: redmine
+spec:
+  ports:
+  - port: 3000
+    targetPort: 3000
+  selector:
+    app: redmine
+  type: ClusterIP
