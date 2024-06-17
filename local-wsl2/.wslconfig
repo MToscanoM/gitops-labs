@@ -1,0 +1,7 @@
+[wsl2]
+
+# networkingMode=mirrored
+memory=8GB
+
+# dnsTunneling=true
+# autoProxy=true
