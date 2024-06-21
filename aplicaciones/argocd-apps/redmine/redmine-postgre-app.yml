@@ -4,7 +4,7 @@ metadata:
   name: redmine-postgresql-app
   namespace: argocd-platform
 spec:
-  project: redmine-demo
+  project: redmine-project
   source:
     repoURL: 'https://github.com/MToscanoM/gitops-labs.git'
     targetRevision: HEAD
