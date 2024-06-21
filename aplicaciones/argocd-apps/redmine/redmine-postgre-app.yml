@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: redmine-postgresql-app
+  namespace: argocd-platform
+spec:
+  project: redmine-demo
+  source:
+    repoURL: 'https://github.com/MToscanoM/gitops-labs.git'
+    targetRevision: HEAD
+    path: aplicaciones/redmine
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: redmine
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+  ignoreDifferences:
+  - group: ''
+    kind: Secret
+    jsonPointers:
+    - /data

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redmine
+  name: redmine-demo
   namespace: redmine
 spec:
   replicas: 1
@@ -53,12 +53,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: redmine
+  name: redmine-svc
   namespace: redmine
 spec:
   ports:
   - port: 3000
     targetPort: 3000
   selector:
-    app: redmine
+    app: redmine-demo
   type: ClusterIP

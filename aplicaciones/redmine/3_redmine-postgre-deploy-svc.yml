@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redmine-postgresql
+  name: redmine-postgresql-demo
   namespace: redmine
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: redmine-postgresql
+      app: redmine-postgresql-demo
   template:
     metadata:
       labels:
-        app: redmine-postgresql
+        app: redmine-postgresql-demo
     spec:
       containers:
       - name: postgresql
@@ -45,10 +45,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: redmine-postgresql
+  name: redmine-postgresql-svc
   namespace: redmine
 spec:
   ports:
   - port: 5432
   selector:
-    app: redmine-postgresql
+    app: redmine-postgresql-demo

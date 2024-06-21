@@ -1,6 +1,6 @@
 # MiniLab InternalDevelopmentPlatform con ArgoCD
 
-# Crear cluster con Minikube en Powershell con Podman instalado
+# Minikube en Powershell con Podman Desktop instalado
 >Para instalar Minikube:
 >https://minikube.sigs.k8s.io/docs/start/
 
@@ -12,6 +12,12 @@ minikube start --profile minikube-idp-labs --driver podman --cni auto --nodes 2 
 # minikube addons enable storage-provisioner
 # minikube addons enable metrics-server
 ```
+
+# Minikube en Powershell con Docker Engine
+## Instalación de Docker Engine y activación de Contenedores e Hyper-V en Características de Windows
+> Sirve para remplazar Docker-Desktop y poder usar 
+https://minikube.sigs.k8s.io/docs/tutorials/docker_desktop_replacement/#Windows
+> Sólo contenedores windows.
 
 ## Instalar ArgoCD
 

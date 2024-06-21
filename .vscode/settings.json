@@ -1,3 +1,7 @@
 {
-    "CodeGPT.apiKey": "Custom"
+    "CodeGPT.apiKey": "Custom",
+    "yaml.schemas": {
+        "file:///c%3A/Users/TOSCANOMARTM/.vscode/extensions/docsmsft.docs-yaml-0.2.9/schemas/toc.schema.json": "/toc\\.yml/i",
+        "kubernetes://schema/v1@configmap": "file:///c%3A/Users/TOSCANOMARTM/repos/gitops-labs/plataforma/argocd/argocd-notifications-cm.yml"
+    }
 }
