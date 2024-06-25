@@ -4,3 +4,4 @@ plataforma/argocd/argocd-notifications-secret.yml
 .vscode/settings.json
 README_tmp.html
 .vscode/settings.json
+plataforma/sistemas/vagrant/bionic64/.vagrant

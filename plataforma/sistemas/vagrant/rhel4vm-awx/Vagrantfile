@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+    # Define la caja base
+    config.vm.box = "generic/rhel8"
+  
+    # Configurar múltiples VMs
+    (1..4).each do |i|
+      config.vm.define "rhel_vm#{i}" do |vm|
+        vm.vm.network "private_network", type: "dhcp"
+        vm.vm.hostname = "rhel-vm#{i}"
+        vm.vm.provider "hyperv" do |h|
+          h.memory = 2048
+          h.cpus = 2
+        end
+      end
+    end
+  end
+  

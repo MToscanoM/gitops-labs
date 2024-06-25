@@ -1,0 +1,38 @@
+Vagrant.configure("2") do |config|
+  # Configuración del proveedor Hyper-V
+  config.vm.provider "hyperv" do |h|
+    h.vm_integration_services = {
+      guest_service_interface: true
+    }
+  end
+
+  # Configuración del nodo master
+  config.vm.define "master" do |master|
+    master.vm.box = "generic/ubuntu2204"
+    master.vm.hostname = "master"
+    master.vm.network "private_network", type: "dhcp"
+    master.vm.provider "hyperv" do |h|
+      h.memory = 2048
+      h.cpus = 2
+    end
+    master.vm.provision "shell", inline: <<-SHELL
+      curl -sfL https://get.k3s.io | sh -s - --write-kubeconfig-mode 644
+    SHELL
+  end
+
+  # Configuración de los nodos worker
+  (1..3).each do |i|
+    config.vm.define "worker#{i}" do |worker|
+      worker.vm.box = "generic/ubuntu2204"
+      worker.vm.hostname = "worker#{i}"
+      worker.vm.network "private_network", type: "dhcp"
+      worker.vm.provider "hyperv" do |h|
+        h.memory = 2048
+        h.cpus = 2
+      end
+      worker.vm.provision "shell", inline: <<-SHELL
+        K3S_URL="https://master:6443" K3S_TOKEN=$(cat /var/lib/rancher/k3s/server/node-token) sh -s - agent
+      SHELL
+    end
+  end
+end

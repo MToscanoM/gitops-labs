@@ -18,8 +18,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  ignoreDifferences:
-  - group: ''
-    kind: Secret
-    jsonPointers:
-    - /data
+  # ignoreDifferences:
+# - group: ''
+#   kind: Secret
+#   jsonPointers:
+#   - /data
