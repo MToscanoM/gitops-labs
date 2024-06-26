@@ -5,3 +5,5 @@ plataforma/argocd/argocd-notifications-secret.yml
 README_tmp.html
 .vscode/settings.json
 plataforma/sistemas/vagrant/bionic64/.vagrant
+plataforma/sistemas/vagrant/k3s-cluster/.vagrant/rgloader/loader.rb
+plataforma/sistemas/vagrant/k3s-cluster/.vagrant/bundler/global.sol
