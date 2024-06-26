@@ -1,0 +1,20 @@
+- name: Deploy application
+  hosts: all
+  tasks:
+  - name: Ensure application directory exists
+    file:
+      path: /var/www/myapp
+      state: directory
+
+  - name: Copy application files
+    copy:
+      src: /path/to/your/application/
+      dest: /var/www/myapp/
+      owner: www-data
+      group: www-data
+      mode: '0755'
+
+  - name: Restart web server
+    service:
+      name: apache2
+      state: restarted
