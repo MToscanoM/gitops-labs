@@ -6,16 +6,16 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx
   rules:
-  - http:
-    paths:
-    - path: /argocd
-      pathType: Prefix
-      backend:
-        service:
-          name: argocd-server
-          port:
-            number: 8080
+  - host: ""
+    http:
+      paths:
+      - path: /argocd
+        pathType: Prefix
+        backend:
+          service:
+            name: argocd-server
+            port:
+              number: 8080
 
 # - host: minilab.local
