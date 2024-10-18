@@ -1,0 +1,23 @@
+# https://kubernetes.io/docs/concepts/services-networking/ingress/#the-ingress-resource
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ittools-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: homelab.marianotoscano.es
+    http:
+      paths:
+      - path: /it-tools
+        pathType: Prefix
+        backend:
+          service:
+            name: it-tools-service
+            port:
+              number: 80
+
