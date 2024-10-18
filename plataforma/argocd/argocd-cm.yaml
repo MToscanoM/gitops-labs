@@ -19,7 +19,7 @@ data:
   accounts.mariano: login
   accounts.mariano.enabled: "true"
   application.instanceLabelKey: argocd.argoproj.io/instance
-  url: http://localhost/argocd/
+  url: http://192.168.1.2/argocd/
   resource.customizations.ignoreDifferences.admissionregistration.k8s.io_MutatingWebhookConfiguration: |
     jqPathExpressions:
     - '.webhooks[]?.clientConfig.caBundle'

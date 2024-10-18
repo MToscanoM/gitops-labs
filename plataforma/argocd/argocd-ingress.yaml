@@ -4,13 +4,14 @@ metadata:
   name: argocd-ingress
   namespace: argocd-platform
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /argocd/$1
 spec:
+  ingressClassName: nginx
   rules:
-  - host: ""
+  - host: #megadrive.local
     http:
       paths:
-      - path: /argocd
+      - path: /argocd/(.*)
         pathType: Prefix
         backend:
           service:
